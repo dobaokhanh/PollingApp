@@ -38,4 +38,3 @@ Polling Application is an application where we could create polls for other user
         * **AuthenticationManagerBuilder and AuthenticationManager**: `AuthenticationManagerBuilder` is used to created an `AuthenticationManager` instance which is the main Spring Security interface for authenticating user. `AuthenticationManager` is used to authenticate a user in login API
         * **HttpSecurity configurations**: `HttpSecurity` configurations are used to configure security functionalities like `csrf`, `sessionManagement`, and add the rules to protect resources.
         
-        
