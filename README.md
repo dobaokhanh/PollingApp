@@ -41,10 +41,17 @@ Polling Application is an application where we could create polls for other user
     * **Auditing**:
      * @**EnableJpaAuditing**
      * @**JsonIgnoreProperties**: ignores the specified local properties in JSON serialization and deserialization
-  * **REST APIs**:
-   * **Model Mapper**: Maps the `Poll` entity to a `PollResponse` payload. All these information will be used in front-end for presentation
-   * **Poll Controller**:
-    * Create a poll
-    * Get a paginated list of polls sorted by their creation time
-    * Get a Poll by pollId
-    * Vote in a poll
+  * ### REST APIs:
+    * **Model Mapper**: Maps the `Poll` entity to a `PollResponse` payload. All these information will be used in front-end for presentation
+    * **Poll Controller**:
+      * Create a poll
+      * Get a paginated list of polls sorted by their creation time
+      * Get a Poll by pollId
+      * Vote in a poll
+    * **User Controller**;
+      * Get the current logged in user
+      * Check if a username is available for registration
+      * Check if an email is avaliable for registration
+      * Get the public profile of a user
+      * Get a paginated list of polls created by a given user
+      * Get a paginated list of polls in which a given user has voted
