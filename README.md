@@ -37,4 +37,14 @@ Polling Application is an application where we could create polls for other user
           * Set the user details in Spring Security's `SecurityContext`. Spring Security uses the user details to perform authorization checks.
         * **AuthenticationManagerBuilder and AuthenticationManager**: `AuthenticationManagerBuilder` is used to created an `AuthenticationManager` instance which is the main Spring Security interface for authenticating user. `AuthenticationManager` is used to authenticate a user in login API
         * **HttpSecurity configurations**: `HttpSecurity` configurations are used to configure security functionalities like `csrf`, `sessionManagement`, and add the rules to protect resources.
-        
+      * **WebMvcConfig**: enable CORS (cross origin requests) because we gonna build React client, so in order to access API from React client, we have to enable CORS 
+    * **Auditing**:
+     * @**EnableJpaAuditing**
+     * @**JsonIgnoreProperties**: ignores the specified local properties in JSON serialization and deserialization
+  * **REST APIs**:
+   * **Model Mapper**: Maps the `Poll` entity to a `PollResponse` payload. All these information will be used in front-end for presentation
+   * **Poll Controller**:
+    * Create a poll
+    * Get a paginated list of polls sorted by their creation time
+    * Get a Poll by pollId
+    * Vote in a poll
