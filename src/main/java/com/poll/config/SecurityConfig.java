@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.poll.security.CustomerDetailService;
+import com.poll.security.CustomUserDetailService;
 import com.poll.security.JwtAuthenticationEntryPoint;
 import com.poll.security.JwtAuthenticationFilter;
 
@@ -29,7 +29,7 @@ import com.poll.security.JwtAuthenticationFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	CustomerDetailService customerDetailService;
+	CustomUserDetailService customerDetailService;
 	
 	@Autowired
 	private JwtAuthenticationEntryPoint unauthorizedHandler;

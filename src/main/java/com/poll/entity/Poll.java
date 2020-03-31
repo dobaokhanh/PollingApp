@@ -25,32 +25,29 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "polls")
-public class Poll extends UserDateAudit{
-	
+public class Poll extends UserDateAudit {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	private String question;
-	
-	@OneToMany(mappedBy = "poll",
-			cascade = CascadeType.ALL,
-			fetch = FetchType.EAGER,
-			orphanRemoval = true)
+
+	@OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@Size(min = 2)
 	@Fetch(FetchMode.SELECT)
 	@BatchSize(size = 30)
 	private List<Choice> choices = new ArrayList<>();
-	
+
 	@NotNull
 	private Instant expirationDateTime;
-	
-	public void addChoice (Choice choice) {
+
+	public void addChoice(Choice choice) {
 		choices.add(choice);
 		choice.setPoll(this);
 	}
-	
+
 	public void removeChoice(Choice choice) {
 		choices.remove(choice);
 		choice.setPoll(null);
@@ -87,5 +84,5 @@ public class Poll extends UserDateAudit{
 	public void setExpirationDateTime(Instant expirationDateTime) {
 		this.expirationDateTime = expirationDateTime;
 	}
-	
+
 }

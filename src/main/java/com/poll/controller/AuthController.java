@@ -46,6 +46,12 @@ public class AuthController {
 	@Autowired
 	JwtTokenProvider jwtTokenProvider;
 
+	/**
+	 * Authenticate User, generate JWT token, and return the JWT token to response
+	 * 
+	 * @param loginRequest
+	 * @return http response
+	 */
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -57,6 +63,12 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 	}
 
+	/**
+	 * Sign up User
+	 * 
+	 * @param signupRequest
+	 * @return Http response
+	 */
 	@SuppressWarnings("unchecked")
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
@@ -75,14 +87,13 @@ public class AuthController {
 
 		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
 				.orElseThrow(() -> new AppException("User Role is not set!"));
-		
+
 		user.setRoles(Collections.singleton(userRole));
-		
+
 		User result = userRepository.save(user);
-		
-		URI location = ServletUriComponentsBuilder
-							.fromCurrentContextPath().path("/api/users/{username}")
-							.buildAndExpand(result.getUsername()).toUri();
+
+		URI location = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/{username}")
+				.buildAndExpand(result.getUsername()).toUri();
 		return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
 	}
 }

@@ -43,6 +43,13 @@ public class UserPrincipal implements UserDetails {
 		this.authorities = authorities;
 	}
 
+	/**
+	 * Create custom UserDetails. Spring Security will use the information stored in
+	 * the UserPrincipal object to perform authentication and authorization
+	 * 
+	 * @param user
+	 * @return UserPrincipal
+	 */
 	public static UserPrincipal create(User user) {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());

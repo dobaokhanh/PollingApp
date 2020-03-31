@@ -12,7 +12,7 @@ import com.poll.entity.User;
 import com.poll.repository.UserRepository;
 
 @Service
-public class CustomerDetailService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
 	@Autowired
 	UserRepository userRepository;
@@ -20,11 +20,16 @@ public class CustomerDetailService implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+		// Let user login with either username or email
 		User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail).orElseThrow(
 				() -> new UsernameNotFoundException("User not found with this username or email:" + usernameOrEmail));
 		return UserPrincipal.create(user);
 	}
 
+	/** This method is used by JwtAuthenticationFilter
+	 * @param id
+	 * @return UserPrincipal
+	 */
 	public UserDetails loadUserById(Long id) {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));

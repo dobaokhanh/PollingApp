@@ -6,17 +6,20 @@ public class UserProfile {
 
 	private Long id;
 
+	private String name;
+
 	private String username;
 
 	private Instant joinedAt;
 
-	private String pollCount;
+	private long pollCount;
 
-	private String voteCount;
+	private long voteCount;
 
-	public UserProfile(Long id, String username, Instant joinedAt, String pollCount, String voteCount) {
+	public UserProfile(Long id, String name, String username, Instant joinedAt, long pollCount, long voteCount) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.username = username;
 		this.joinedAt = joinedAt;
 		this.pollCount = pollCount;
@@ -29,6 +32,14 @@ public class UserProfile {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {
@@ -47,19 +58,19 @@ public class UserProfile {
 		this.joinedAt = joinedAt;
 	}
 
-	public String getPollCount() {
+	public long getPollCount() {
 		return pollCount;
 	}
 
-	public void setPollCount(String pollCount) {
+	public void setPollCount(long pollCount) {
 		this.pollCount = pollCount;
 	}
 
-	public String getVoteCount() {
+	public long getVoteCount() {
 		return voteCount;
 	}
 
-	public void setVoteCount(String voteCount) {
+	public void setVoteCount(long voteCount) {
 		this.voteCount = voteCount;
 	}
 

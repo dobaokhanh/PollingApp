@@ -23,10 +23,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	private JwtTokenProvider tokenProvider;
 
 	@Autowired
-	private CustomerDetailService customerDetailService;
+	private CustomUserDetailService customerDetailService;
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
+	/**
+	 * Get the JWT token from the request, validate it, load the user associated with the token
+	 * and pass it to Spring Security
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -43,9 +47,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		} catch (Exception e) {
 			logger.error("Could not set user authentication in security context", e);
 		}
+		
+		// continues HTTP request to the destination
 		filterChain.doFilter(request, response);
 	}
 
+	/**
+	 * Get JWT token from request
+	 * 
+	 * @param request
+	 * @return token if found, otherwise return null
+	 */
 	private String getJwtFromRequest(HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
 		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
