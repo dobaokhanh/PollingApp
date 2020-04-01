@@ -55,3 +55,5 @@ Polling Application is an application where we could create polls for other user
       * Get the public profile of a user
       * Get a paginated list of polls created by a given user
       * Get a paginated list of polls in which a given user has voted
+## Status
+Pending. Maybe continuing after 1 months. 
