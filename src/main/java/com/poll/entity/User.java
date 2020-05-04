@@ -14,37 +14,37 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
 import com.poll.entity.audit.DateAudit;
-import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
+@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
 		@UniqueConstraint(columnNames = { "email" }) })
-public class User extends DateAudit{
+public class User extends DateAudit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 40, min = 2)
 	private String name;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 40, min = 2)
 	private String username;
 
 	@NaturalId
-	@NotNull
-	@Size(max = 40)
+	@NotBlank
+	@Size(max = 40, min = 4)
 	@Email
 	private String email;
 
-	@NotNull
-	@Size(max = 40)
+	@NotBlank
+	@Size(min = 6)
 	private String password;
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -70,8 +70,6 @@ public class User extends DateAudit{
 		this.email = email;
 		this.password = password;
 	}
-
-
 
 	public String getName() {
 		return name;

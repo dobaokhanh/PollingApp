@@ -15,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.poll.entity.Role;
@@ -29,6 +31,8 @@ import com.poll.repository.RoleRepository;
 import com.poll.repository.UserRepository;
 import com.poll.security.JwtTokenProvider;
 
+@RestController
+@RequestMapping("/api/auth")
 public class AuthController {
 
 	@Autowired
@@ -83,7 +87,7 @@ public class AuthController {
 		User user = new User(signupRequest.getName(), signupRequest.getUsername(), signupRequest.getEmail(),
 				signupRequest.getPassword());
 
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		//user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
 				.orElseThrow(() -> new AppException("User Role is not set!"));

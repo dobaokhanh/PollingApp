@@ -69,6 +69,18 @@ public class UserController {
 	}
 
 	/**
+	 * Check avalability of given email
+	 * 
+	 * @param email
+	 * @return UserIdentityAvailability
+	 */
+	@GetMapping("/user/checkEmailAvailability")
+	public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
+		Boolean isAvailable = !userRepository.existsByEmail(email);
+		return new UserIdentityAvailability(isAvailable);
+	}
+
+	/**
 	 * Get User Profile
 	 * 
 	 * @param username
